@@ -1,9 +1,14 @@
+from collections import deque
+
 class Partner():
 
 	def __init__(self,rootid, left=None, right=None):
 		self.left = left
 		self.right = right
 		self.rootid = rootid
+
+	def __repr__(self):
+		return str(self.rootid)
 
 	# def __repr__(self, level=0):
 	# 	ret = "\t"*level+repr(self.rootid)+"\n"
@@ -22,10 +27,40 @@ class Partner():
 
 	def find(self, x): #level=0
 		print(self.rootid)
-		if not self: return False # x + " not founded" #None
-		if self.rootid == x:
-			return True #"I founded: " + self.rootid #+ ", at level " + str(level)
-		return self.left.find(x) or self.right.find(x) #, level+1
+		if self.left != None and self.rootid != x:
+			self.left.find(x)
+		if self.right != None and self.rootid != x:
+			self.right.find(x) #, level+1
+		return "I founded: " + self.rootid if self.rootid == x else x + " not founded"
+
+	def BFT(node):
+
+	    node.level = 1
+	    queue = deque([node])
+	    output = []
+	    current_level = node.level
+
+	    while len(queue)>0:
+
+	          current_node = queue.popleft()
+
+	          if(current_node.level > current_level):
+	              output.append("\n")
+	              current_level += 1
+
+	          output.append(str(current_node))
+
+	          if current_node.left != None:
+	             current_node.left.level = current_level + 1 
+	             queue.append(current_node.left) 
+
+	          if current_node.right != None:
+	             current_node.right.level = current_level + 1 
+	             queue.append(current_node.right)
+
+	                 
+	 
+	    return ''.join(output)
 
 	def insertRight(self,newNode):
 		if self.right == None:
@@ -72,6 +107,7 @@ def testTree():
 	myTree.insertRight("Steven")
 	myTree.insertLeft("Matt")
 	printTree(myTree)
+	print myTree.BFT()	
 	# print('1st research')
 	# print(myTree.find("Maud"))
 	# print('2nd research')
