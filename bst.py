@@ -1,3 +1,5 @@
+# source: http://interactivepython.org/runestone/static/pythonds/Trees/SearchTreeImplementation.html
+
 class BinarySearchTree:
     def __init__(self):
         """ create an empty binary search tree """
