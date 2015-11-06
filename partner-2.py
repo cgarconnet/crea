@@ -49,15 +49,19 @@ class Partner():
 
 	def find(self, x):
 		print(self.rootid)
-		if self.left == None or self.right == None: return # test1
-#		if self.left == None: return # test2
-#		if self.right == None: return # test2
-		if self.rootid == x: return "I founded: " + self.rootid
+#		if self.left == None or self.right == None: return # test1
+#		if self.left == None: return None # test2
+#		if self.right == None: return None # test2
+		if self.rootid == x: return self.rootid
 
-		if self.left != None and self.rootid != x:
+		if self.left: #!= None and self.rootid != x:
 			return self.left.find(x)
-		if self.right != None and self.rootid != x:
+		else:
+			return
+		if self.right: # != None and self.rootid != x:
 			return self.right.find(x)
+		else:
+			return
 
 
 	def BFT(tree):
